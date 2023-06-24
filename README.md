@@ -12,3 +12,6 @@ This tool offers a fine-grained search, going beyond just episode summaries, by 
 ## TV Shows Supported
 * Office 
 * Parks and Rec
+
+## How to Run Locally
+The app is available on streamlit cloud. However to run locally, install requirements.txt and run `streamlit run app.py`
