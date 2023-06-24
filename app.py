@@ -42,7 +42,7 @@ def main():
 
     st.sidebar.title("Note for user")
     st.sidebar.markdown(
-        "The tool retreives the episode with a corresponding matching scene from the show. \nThe scene description displayed may not always be 100% accurate")
+        "The tool retreives the episode with a corresponding matching scene from the show. \nThe scene description displayed may not always be 100% accurate. Also, items in the searchbox are logged")
 
     MIN_CHAR, MAX_CHAR = 4, 150
     if searchbar and not keyphrase.strip():
