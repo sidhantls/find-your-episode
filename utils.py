@@ -52,7 +52,7 @@ class Retriever:
 
         answer2 = get_similar_multiple_matches(response, thresh=0.55)
 
-        similar_items = response[response['score'] > 0.47].drop_duplicates(
+        similar_items = response[response['score'] > 0.48].drop_duplicates(
             ['season', 'episode'], keep='first').iloc[:8]
         similar_items = pd.concat(
             [answer2, similar_items], axis=0).drop_duplicates(['season', 'episode'])
