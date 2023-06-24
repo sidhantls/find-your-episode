@@ -38,7 +38,7 @@ def main():
                     "You can search for scenes related to specific topics to help you find interesting episodes")
 
     st.sidebar.title("Example Usage")
-    st.sidebar.markdown("The Office:\n1. Pam goes to design school\n2. Jim puts Dwight's stapler in Jello\n3. Micheal does a Chris Rock impression\n\nParks and Rec:\n1. John Ralphio and Tom\n2. Duke silver playing in concert")
+    st.sidebar.markdown("The Office:\n1. Pam goes to design school\n2. Jim puts Dwight's stapler in Jello\n3. michael does a Chris Rock impression\n\nParks and Rec:\n1. John Ralphio and Tom\n2. Duke silver playing in concert")
 
     st.sidebar.title("Note for user")
     st.sidebar.markdown(
