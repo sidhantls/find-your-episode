@@ -1,5 +1,5 @@
 # Find your Episode 
-Re-discover your favorite moments in TV Shows with scene-level search
+Re-discover your favorite moments in sitcoms with scene-level search
 
 <p align="center">
   <img src="https://github.com/sidhantls/find-your-episode/blob/main/imgs/office_img.png" />
