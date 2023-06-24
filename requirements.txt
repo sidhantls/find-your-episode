@@ -1,0 +1,8 @@
+faiss-cpu==1.7.4
+streamlit==1.23.1
+pandas
+google-cloud-firestore==2.11.1
+torch==1.7.1 --index-url https://download.pytorch.org/whl/cpu
+torchvision --index-url https://download.pytorch.org/whl/cpu
+torchaudio --index-url https://download.pytorch.org/whl/cpu
+transformers==4.30.2
