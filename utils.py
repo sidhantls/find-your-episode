@@ -65,8 +65,8 @@ class Retriever:
         distances, indices = self.faiss_index.search(query_vector, k=20)
         distances, indices = distances[0, :], indices[0, :]
 
-        distances = distances[distances > 0.2]
         indices = indices[distances > 0.2]
+        distances = distances[distances > 0.2]
 
         return distances, indices
 
