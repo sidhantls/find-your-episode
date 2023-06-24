@@ -1,10 +1,8 @@
 # Find your Episode 
-Re-discover your favorite moments in sitcoms with scene-level search
+Re-discover your favorite moments in sitcoms with scene-level search. [find-your-episode.streamlit.app](https://find-your-episode.streamlit.app/)
 <p align="center">
   <img src="https://github.com/sidhantls/find-your-episode/blob/main/imgs/office_img.png" />
 </p>
-
-Hosted here [find-your-episode.streamlit.app](https://find-your-episode.streamlit.app/)
 
 Query episodes of TV Shows (Office or Parks and Rec) using topics or scenes of your interest. If you're rewatching these TV Series, this tool can help you find related episodes to your search
 
