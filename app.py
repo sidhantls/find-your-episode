@@ -35,7 +35,7 @@ def main():
 
     st.sidebar.title("About")
     st.sidebar.info("This app helps you find episodes from a TV show based on a keyphrase. \n\n"
-                    "You can search for scenes related to specific topics to help you find interesting episodes")
+                    "You can search for scenes related to specific topics to help you find episodes of interest")
 
     st.sidebar.title("Example Usage")
     st.sidebar.markdown("The Office:\n1. Pam goes to design school\n2. Jim puts Dwight's stapler in Jello\n3. michael does a Chris Rock impression\n\nParks and Rec:\n1. John Ralphio and Tom\n2. Duke silver playing in concert")
