@@ -27,18 +27,20 @@ def main():
     # Sidebar navigation
     st.sidebar.image("imgs/dunder_mifflin.png", use_column_width=True)
 
+    st.sidebar.info("You can search for scenes related to specific topics to help find episodes of interest")
+
     st.sidebar.title("Navigation")
     tabs = ["Office", "Parks"]
     selected_tab = st.sidebar.radio("Select Tab", tabs)
     keyphrase = st.sidebar.text_input("Enter a keyphrase")
     searchbar = st.sidebar.button("Search")
 
-    st.sidebar.title("About")
-    st.sidebar.info("This app helps you find episodes from a TV show based on a keyphrase. \n\n"
-                    "You can search for scenes related to specific topics to help you find episodes of interest")
-
     st.sidebar.title("Example Usage")
     st.sidebar.markdown("The Office:\n1. Pam goes to design school\n2. Jim puts Dwight's stapler in Jello\n3. Michael does a Chris Rock impression\n\nParks and Rec:\n1. John Ralphio and Tom\n2. Duke silver playing in concert")
+
+    st.sidebar.title("How it works")
+
+    st.sidebar.info("1. Given a keyphrase, system searches through various scenes of each episode.\n2. Using semantic search it retrieves episodes with most similar scenes matching the query")
 
     st.sidebar.title("Note for user")
     st.sidebar.markdown(
