@@ -54,6 +54,11 @@ class Retriever:
 
         similar_items = response[response['score'] > 0.48].drop_duplicates(
             ['season', 'episode'], keep='first').iloc[:8]
+
+        if len(similar_items) == 0:
+            similar_items = response[response['score'] > 0.45].drop_duplicates(
+                ['season', 'episode'], keep='first').iloc[:3]
+
         similar_items = pd.concat(
             [answer2, similar_items], axis=0).drop_duplicates(['season', 'episode'])
         similar_items = similar_items[~similar_items.index.isin(answer1.index)]
