@@ -32,8 +32,8 @@ def main():
     st.sidebar.title("Navigation")
     tabs = ["Office", "Parks"]
     selected_tab = st.sidebar.radio("Select Tab", tabs)
-    keyphrase = st.sidebar.text_input("Enter a keyphrase")
-    searchbar = st.sidebar.button("Search")
+    keyphrase = st.text_input("Enter a keyphrase")
+    searchbar = st.button("Search")
 
     st.sidebar.title("Example Usage")
     st.sidebar.markdown("The Office:\n1. Pam goes to design school\n2. Jim puts Dwight's stapler in Jello\n3. Michael does a Chris Rock impression\n\nParks and Rec:\n1. John Ralphio and Tom\n2. Duke silver playing in concert")
