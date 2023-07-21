@@ -18,9 +18,9 @@ class Retriever:
             self.idx_to_metadata = json.load(f)
 
         self.tokenizer = AutoTokenizer.from_pretrained(
-            'sentence-transformers/all-MiniLM-L12-v2')
+            'sentence-transformers/all-MiniLM-L6-v2')
         self.model = AutoModel.from_pretrained(
-            'sentence-transformers/all-MiniLM-L12-v2')
+            'sentence-transformers/all-MiniLM-L6-v2')
 
     def get_final_answer(self, sentence):
         distances, indices = self.query_database(sentence)
