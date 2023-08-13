@@ -109,7 +109,7 @@ class KeywordRetriever:
     
     def preprocess(self, desc):
         desc = desc.lower()
-        tokens = [token for token in wordpunct_tokenize(desc) if len(token) > 1]
+        tokens = [token for token in wordpunct_tokenize(desc) if len(token) > 2]
         tokens = " ".join(tokens)
         return tokens
 
