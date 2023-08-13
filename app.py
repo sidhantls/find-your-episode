@@ -21,6 +21,21 @@ def get_retrievers():
     return {'Office': retriever, 'Parks': retriever2}
 
 
+@st.cache_data()
+def get_retrievers_keywords():
+    data_dir = 'data/office/'
+    faiss_path = data_dir + 'faiss_index.index'
+    idx_to_metadata_path = data_dir + 'idx_to_metadata.json'
+    retriever_keyword1 = utils.KeywordRetriever(idx_to_metadata_path) 
+
+    data_dir = 'data/parks/'
+    faiss_path = data_dir + 'faiss_index.index'
+    idx_to_metadata_path = data_dir + 'idx_to_metadata.json'
+    retriever_keyword2 = utils.KeywordRetriever(idx_to_metadata_path) 
+
+    return {'Office': retriever_keyword1, 'Parks': retriever_keyword2}
+
+
 def main():
     st.title("TV Show Episode Search")
 
@@ -55,20 +70,30 @@ def main():
         st.warning('Enter less characters')
     elif searchbar and keyphrase.strip():
         retrievers = get_retrievers()
+        retrievers_keywords = get_retrievers_keywords()
 
         if selected_tab not in selected_tab:
             raise ValueError('Selected TVShow not supported')
 
         keyphrase = keyphrase.strip()
-        office_retriever = retrievers[selected_tab]
-        resp = office_retriever.get_final_answer(keyphrase)
+        retriever = retrievers[selected_tab]
+        retriever_keyword = retrievers_keywords[selected_tab]
+
+        resp = retriever.get_final_answer(keyphrase)
+        resp2 = retriever_keyword.get_final_answer(keyphrase)
 
         DISPCOLS = ['season', 'episode', 'scene summary', 'score']
 
-        if len(resp['correct']):
+        if len(resp2) > 0:
+            st.subheader('Matching Episodes')
+            df2 = resp2[DISPCOLS]
+            st.dataframe(df2)
+
+        elif len(resp['correct']):
             st.subheader('Matching Episodes')
             resp['correct'].drop_duplicates(['season', 'episode'], inplace=True)
-            st.dataframe(resp['correct'][DISPCOLS])
+            df1 = resp['correct'][DISPCOLS]
+            st.dataframe(df1)
         else:
             pass
 
@@ -76,18 +101,18 @@ def main():
             st.subheader('Episodes with Similar Scenes')
             st.dataframe(resp['similar'][DISPCOLS])
 
-        if not len(resp['correct']) and not len(resp['similar']):
+        if not len(resp['correct']) and not len(resp['similar']) and not len(resp2):
             st.subheader('No matches')
 
-        if len(keyphrase.strip()) > 3:
-            db = get_logger()
+        # if len(keyphrase.strip()) > 3:
+        #     db = get_logger()
 
-            data = {
-                "keyword": keyphrase[:80],
-                "name": selected_tab,
-                "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            }
-            db.collection(st.secrets["collection_name"]).add(data)
+        #     data = {
+        #         "keyword": keyphrase[:80],
+        #         "name": selected_tab,
+        #         "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        #     }
+        #     db.collection(st.secrets["collection_name"]).add(data)
 
 
 @st.cache_resource
