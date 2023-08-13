@@ -8,6 +8,7 @@ import torch
 import torch.nn.functional as F
 import faiss
 import streamlit as st
+from nltk.tokenize import wordpunct_tokenize
 
 
 class Retriever:
@@ -95,6 +96,52 @@ class Retriever:
         sentence_embeddings = F.normalize(sentence_embeddings, p=2, dim=1)
         return sentence_embeddings.detach().cpu().numpy()
 
+
+class KeywordRetriever:
+    """
+    Retrieves based on keywords 
+    """
+
+    def __init__(self, idx_to_metadata_path):
+        with open(idx_to_metadata_path) as f:
+            self.idx_to_metadata = json.load(f)
+        self.index_database()
+    
+    def preprocess(self, desc):
+        desc = desc.lower()
+        tokens = [token for token in wordpunct_tokenize(desc) if len(token) > 1]
+        tokens = " ".join(tokens)
+        return tokens
+
+    def index_database(self):
+        for row in self.idx_to_metadata:
+            desc = row['scene summary'].lower()
+            row['tokens'] = self.preprocess(desc)
+
+    def get_final_answer(self, query):
+        if len(query.split()) <= 2:
+            return pd.DataFrame()
+
+        query_tokens = self.preprocess(query)  
+        scores = [] 
+        
+        length = len(query_tokens)
+        for idx, row in enumerate(self.idx_to_metadata):
+            score = query_tokens in row['tokens']
+            scores.append(float(score))
+        
+        scores = np.array(scores) 
+        top_indices = np.argsort(scores)[::-1][:20]
+        top_scores = scores[top_indices]
+        top_scores = top_scores[top_scores>0.5]
+
+        if len(top_scores) == 0:
+            return [] 
+        
+        response = [] 
+        for idx, score in zip(top_indices, top_scores):
+            response.append({**self.idx_to_metadata[idx], 'score':score})
+        return pd.DataFrame(response)
 
 def get_similar_multiple_matches(response, thresh=0.55):
     temp = response[response['score'] > thresh]
