@@ -6,3 +6,4 @@ torch==1.7.1 --index-url https://download.pytorch.org/whl/cpu
 torchvision --index-url https://download.pytorch.org/whl/cpu
 torchaudio --index-url https://download.pytorch.org/whl/cpu
 transformers==4.30.2
+nltk
