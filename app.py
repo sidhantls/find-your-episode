@@ -104,15 +104,15 @@ def main():
         if not len(resp['correct']) and not len(resp['similar']) and not len(resp2):
             st.subheader('No matches')
 
-        # if len(keyphrase.strip()) > 3:
-        #     db = get_logger()
+        if len(keyphrase.strip()) > 3:
+            db = get_logger()
 
-        #     data = {
-        #         "keyword": keyphrase[:80],
-        #         "name": selected_tab,
-        #         "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        #     }
-        #     db.collection(st.secrets["collection_name"]).add(data)
+            data = {
+                "keyword": keyphrase[:80],
+                "name": selected_tab,
+                "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            }
+            db.collection(st.secrets["collection_name"]).add(data)
 
 
 @st.cache_resource
